@@ -56,12 +56,41 @@ Class View extends Database{
 	}
 
 	public function Raccourcie(){
-		$db = $this->dbConnect();
-		$list = $db->query('SELECT * FROM application ORDER BY id');
-
+		$list = $this->Query('application','ORDER BY id');
 		while ($data = $list->fetch()) {
 			echo '<a href="'.$data['Lien'].'"><img src="public/image/'.$data['Picture'].'" title="'.$data['Name'].'"></a>';
 		}
+	}
+
+	public function RequestSettings($colone){
+		$demande = $this-> Query('settings')->fetch();
+		return $demande[$colone];
+	}
+
+	public function Event(){
+		$date = date('d-m');
+		$listEvent = $this->Query('event', 'ORDER BY id');
+		if(!empty($listEvent)){
+			while($data = $listEvent->fetch()){
+				if($data['jour'] == $date){
+					echo $data['message'];
+				}else{
+					echo 'Il n\'y as rien de spécial aujourd\'hui';
+				}
+			}
+		}else{
+			echo 'Il n\'y as rien de spécial aujourd\'hui';
+		}
+		
+	}
+
+	public function ListEvent(){
+		$listEvent = $this->Query('event', 'ORDER BY jour DESC');
+		echo '<div class="para">';
+		while ($data = $listEvent->fetch()){
+			echo '<p>'.$data['jour'].': '.$data['message'].'</p>';
+		}
+		echo '</div>';
 	}
 
 }

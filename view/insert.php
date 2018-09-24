@@ -8,10 +8,7 @@ if(isset($_POST['insert'])) {
 		$picture = htmlspecialchars($_POST['picture']);
 		$name = htmlspecialchars($_POST['name']);
 
-		$database->Insert($name,$lien,$picture);
-		unset($_POST['lien']);
-		unset($_POST['picture']);
-		unset($_POST['name']);
+		$database->Insert('application (Name,Lien,Picture)','(?,?,?)',array($name,$lien,$picture));
 		$success = 'Votre raccourcie a bien été ajouté';
 
 	}else{
@@ -21,12 +18,11 @@ if(isset($_POST['insert'])) {
 	header('Location: index.php');
 }
 
-
 ?>
 
 <h1>Ajouté un raccourcie</h1>
 
-<p>Pour rajouter un raccourcie, veuillez remplir les champs suivants: </p>
+<p style="text-align: center;">Pour rajouter un raccourcie, veuillez remplir les champs suivants: </p>
 
 <form action="" method="POST">
 	<table  align="center">

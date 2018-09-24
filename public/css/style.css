@@ -1,14 +1,14 @@
-	/* GENERAL */
-body{
-	background: url(../image/index.jpg);
-}
+ 	/* GENERAL */
+
 h1{
 	text-align: center;
 	text-decoration: underline red;
 }
-p{
+.para{
+	background: #fff; 
+	width: 600px; 
+	margin: auto;
 	font-size: 20px;
-	font-weight: bold;
 	text-align: center;
 }
 
@@ -22,16 +22,16 @@ p{
 }
 #home #global{
 	border: 1px #dadada solid;
-	width: 650px;
+	width: 670px;
 }
 #home img{
-	height: 150px; 
-	width: 150px; 
+	height: 100px; 
+	width: 100px; 
 	padding: 5px 5px;
 }
 #home img:hover{
-	height: 155px; 
-	width: 155px; 
+	height: 105px; 
+	width: 105px; 
 	padding: 5px 5px;
 }
 
