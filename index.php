@@ -11,7 +11,6 @@ if (isset($_GET['action'])) {
 }else{
 	require ('view/acceuil.php');
 }
-
 $content = ob_get_clean();
 
 require ('view/default.php');

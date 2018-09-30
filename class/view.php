@@ -62,6 +62,12 @@ Class View extends Database{
 		}
 	}
 
+	public function Option(){
+		echo '<a href="index.php?action=insert"><img src="public/image/add.png" title="Ajouté un raccourcie"></a>';
+		echo '<a href="index.php?action=supprimer"><img src="public/image/supprimer.png" title="Supprimer un raccourcie"></a>';
+		echo '<a href="index.php?action=settings"><img src="public/image/settings.png" title="Settings"></a>';
+	}
+
 	public function RequestSettings($colone){
 		$demande = $this-> Query('settings')->fetch();
 		return $demande[$colone];
@@ -70,18 +76,18 @@ Class View extends Database{
 	public function Event(){
 		$date = date('d-m');
 		$listEvent = $this->Query('event', 'ORDER BY id');
+		$incrementation = 0;
 		if(!empty($listEvent)){
 			while($data = $listEvent->fetch()){
 				if($data['jour'] == $date){
 					echo $data['message'];
-				}else{
-					echo 'Il n\'y as rien de spécial aujourd\'hui';
+					$incrementation = 1;
 				}
 			}
-		}else{
-			echo 'Il n\'y as rien de spécial aujourd\'hui';
-		}
-		
+			if($incrementation == 0){
+				echo "Il y a rien de spécial aujourd'hui";
+			}	
+		}	
 	}
 
 	public function ListEvent(){

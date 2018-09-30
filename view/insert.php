@@ -2,15 +2,21 @@
 
 if(isset($_POST['insert'])) {
 
-	if(!empty($_POST['lien']) && !empty($_POST['picture']) && !empty($_POST['name'])) {
-
-		$lien = htmlspecialchars($_POST['lien']);
-		$picture = htmlspecialchars($_POST['picture']);
-		$name = htmlspecialchars($_POST['name']);
-
-		$database->Insert('application (Name,Lien,Picture)','(?,?,?)',array($name,$lien,$picture));
-		$success = 'Votre raccourcie a bien été ajouté';
-
+	if(!empty($_POST['lien']) && !empty($_FILES['picture']) && !empty($_POST['name'])) {
+		if($_FILES['picture']['error'] == 0){
+			if($_FILES['picture']['size'] <= 5000000){
+				$infosfichier = pathinfo($_FILES['picture']['name']);
+				$extension_upload = $infosfichier['extension'];
+				$extension_autoriser = array('jpg', 'jpeg', 'gif', 'png');
+				if(in_array($extension_upload, $extension_autoriser)){
+					move_uploaded_file($_FILES['picture']['tmp_name'], 'public/image/'.basename($_FILES['picture']['name']));
+					$lien = htmlspecialchars($_POST['lien']);
+					$name = htmlspecialchars($_POST['name']);
+					$database->Insert('application (Name,Lien,Picture)','(?,?,?)',array($name,$lien,basename($_FILES['picture']['name'])));
+					$success = 'Votre raccourcie a bien été ajouté';
+				}
+			}
+		}
 	}else{
 		$erreur = 'Tous les champs ne sont pas remplit !';
 	}
@@ -24,7 +30,7 @@ if(isset($_POST['insert'])) {
 
 <p style="text-align: center;">Pour rajouter un raccourcie, veuillez remplir les champs suivants: </p>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
 	<table  align="center">
 		<tr>
 			<td><label for="lien">Lien du raccourcie: </label></td>
@@ -33,7 +39,7 @@ if(isset($_POST['insert'])) {
 
 		<tr>
 			<td><label for="picture">Nom de l'image: </label></td>
-			<td><input type="text" name="picture" id="picture"></td>
+			<td><input type="file" name="picture" id="picture"></td>
 		</tr>
 
 		<tr>

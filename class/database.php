@@ -28,4 +28,9 @@ Class Database{
 		$update = $db->prepare('UPDATE '.$table.' SET '.$colonne.' WHERE '.$conditon);
 		$updatefinish = $update->execute($valeur);
 	}
+
+	public function Delete($table, $condition){
+		$db = $this->dbConnect();
+		$delete = $db->query('DELETE FROM '.$table.' WHERE '.$condition);
+	}
 }

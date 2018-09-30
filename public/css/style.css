@@ -24,12 +24,12 @@ h1{
 	border: 1px #dadada solid;
 	width: 670px;
 }
-#home img{
+img{
 	height: 100px; 
 	width: 100px; 
 	padding: 5px 5px;
 }
-#home img:hover{
+img:hover{
 	height: 105px; 
 	width: 105px; 
 	padding: 5px 5px;

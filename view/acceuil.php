@@ -2,13 +2,14 @@
 <div class="para">
 	<p>
 		<?= $view->Event(); ?>
-		<a href="index.php?action=event" style="float: right;"><img src="public/image/add.png" title="Ajouté un événement" style="height: 20px;"></a>
+		<a href="index.php?action=event" style="float: right;"><img src="public/image/add.png" title="Ajouté un événement" style="height: 20px; width: 20px;"></a>
 	</p>
 </div>
 <div id="home">
 	<div id="global">
-		<?php $view->Raccourcie(); ?>
-		<a href="index.php?action=insert"><img src="public/image/add.png" title="Ajouté un raccourcie"></a>
-		<a href="index.php?action=settings"><img src="public/image/settings.png" title="Settings"></a>
+		<?php 
+		$view->Raccourcie(); 
+		$view->Option();
+		?>
 	</div>
 </div>
